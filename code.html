@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Patrick+Hand&family=Patua+One&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+
+    body{
+        background-image: url(dock.jpg);
+        height:100%;
+        width:100%;
+        opacity:0.8;
+    }
+    header {
+
+        text-align: center;
+
+    }
+
+    #inp1 {
+        display: flex;
+        justify-content: center;
+        font-family: 'Patua One', cursive;
+        margin:32px 0px;
+        font-size:1.2rem;
+    }
+    button{
+        margin: 0 4px;
+        border: black solid 2px;
+        background-color:#42d7f9 ;
+        font-weight: bold;
+        border-radius: 6px;
+    }
+    button:hover{
+        background-color:#76868c;
+        font-weight: bolder;
+        cursor: pointer;
+    }
+
+    #box {
+        width: 44rem;
+        height: 1.5rem;
+        border-radius: 8px;
+        font-family: 'Patua One', cursive;
+        font-size:1.2rem;
+    }
+
+    h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 3rem;
+        height: 6rem;
+    }
+
+    #output {
+        margin:auto;
+        display:inline-block;
+        box-shadow:3px 2px 6px 2px #306f66;
+        padding:22px 33px;
+        max-width:52rem;
+        font-family:'Patua One', cursive;
+        z-index:10;
+        font-size:1.2rem;
+        background-color:#b7cfd0
+    }
+</style>
+
+<body>
+    <header>
+        <h1>Docker WebApp</h1>
+        <div id="inp1">
+            [root@localhost~]# <input id="box">
+            <button onclick="op()">Enter</button>
+
+        </div>
+        <pre>
+        <span id="output"></span>
+        </pre>
+    </header>
+
+</body>
+<script>
+    function op() {
+        var xhr = new XMLHttpRequest();
+        i=document.getElementById("box").value
+        xhr.open("GET","http://192.168.43.30/cgi-bin/task7.py?x="+i,true);
+        xhr.send();
+
+        xhr.onload=function(){
+            var output = xhr.responseText;
+        document.getElementById('output').innerHTML = output;
+        }
+    }
+</script>
+
+</html>
